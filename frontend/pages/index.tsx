@@ -1,3 +1,5 @@
+import { Button } from "../components/ui/button";
+
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import type { NextPage } from 'next';
 import Head from 'next/head';
@@ -20,6 +22,10 @@ const Home: NextPage = () => {
         <ConnectButton />
 
         <Passport />
+
+        <div className="mt-8">
+          <Button>Click me</Button>
+        </div>
         
       </main>
 
