@@ -100,3 +100,9 @@
     flex-direction: column;
   }
 }
+
+.btn {
+  border: 1px solid #0d76fc;
+  padding: 4px;
+  margin: 8px;
+}
