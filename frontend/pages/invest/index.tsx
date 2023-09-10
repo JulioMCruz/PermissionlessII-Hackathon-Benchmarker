@@ -1,13 +1,9 @@
-
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import styles from '../../styles/Home.module.css';
-
-import * as React from "react"
- 
-import { Button } from "../../components/ui/button"
-import { Input } from "../../components/ui/input"
-import { Label } from "../../components/ui/label"
+import type { NextPage } from "next";
+import Head from "next/head";
+import styles from "../../styles/Home.module.css";
+import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
 import {
   Card,
   CardContent,
@@ -15,17 +11,17 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../../components/ui/card"
+} from "../../components/ui/card";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../../components/ui/select"
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+} from "../../components/ui/select";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -34,23 +30,60 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../../components/ui/dialog"
+} from "../../components/ui/dialog";
+
+const assets = [
+  {
+    label: "ETH",
+    value: "eth",
+  },
+  {
+    label: "WETH",
+    value: "weth",
+  },
+  {
+    label: "WBTC",
+    value: "btc",
+  },
+];
+
+const frequencies = [
+  {
+    label: "Daily",
+    value: "daily",
+  },
+  {
+    label: "Weekly",
+    value: "weekly",
+  },
+  {
+    label: "Monthly",
+    value: "monthly",
+  },
+];
 
 const Invest: NextPage = () => {
-
   const { isConnected } = useAccount();
-  const [isClient, setIsClient] = useState(false)
+  const [isClient, setIsClient] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
- 
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
+  const [projectedInvestment, setProjectedInvestment] = useState(0);
+  const [selectedAsset, setSelectedAsset] = useState("eth");
+  const [duration, setDuration] = useState(0);
+  const [frequency, setFrequency] = useState("daily");
+  const [amount, setAmount] = useState(0);
 
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    setProjectedInvestment(duration * amount);
+  }, [duration, amount]);
 
   const processInvest = () => {
-    console.log("Investing...")
+    console.log("Investing...");
     setOpenDialog(true);
-  }
+  };
 
   return (
     <div className={styles.container}>
@@ -64,7 +97,6 @@ const Invest: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-
         <Card className="w-[350px]">
           <CardHeader>
             <CardTitle>Invest</CardTitle>
@@ -73,102 +105,142 @@ const Invest: NextPage = () => {
           <CardContent>
             <form>
               <div className="grid w-full items-center gap-4">
-
-              <div className="flex flex-col space-y-1.5">
+                <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="frequency">Frequency</Label>
-                  <Select>
+                  <Select onValueChange={setFrequency}>
                     <SelectTrigger id="frequency">
                       <SelectValue placeholder="Select" />
                     </SelectTrigger>
                     <SelectContent position="popper">
-                      <SelectItem value="daily">Daily</SelectItem>
-                      <SelectItem value="weekly">Weekly</SelectItem>
-                      <SelectItem value="monthly">Monthly</SelectItem>
+                      {frequencies.map((f, i) => (
+                        <SelectItem
+                          key={"frequency-option-" + i}
+                          value={f.value}
+                        >
+                          {f.label}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                 </div>
 
                 <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="duration">Duration</Label>
-                  <Input id="duration" placeholder="Duration of your investment" />
+                  <Input
+                    id="duration"
+                    type="number"
+                    placeholder="Duration of your investment"
+                    value={duration}
+                    onChange={(e) => setDuration(parseInt(e.target.value))}
+                  />
                 </div>
 
                 <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="buying">Buying</Label>
-                  <Select>
+                  <Select onValueChange={setSelectedAsset}>
                     <SelectTrigger id="buying">
                       <SelectValue placeholder="Select" />
                     </SelectTrigger>
                     <SelectContent position="popper">
-                      <SelectItem value="next">ETH</SelectItem>
-                      <SelectItem value="sveltekit">USDC</SelectItem>
+                      {assets.map((asset, i) => (
+                        <SelectItem key={"asset-" + i} value={asset.value}>
+                          {asset.label}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                 </div>
 
                 <div className="flex flex-col space-y-1.5">
-                  <Label htmlFor="dailyInvestment">Daily Investment</Label>
-                  <Input id="dailyInvestment" />
+                  <Label htmlFor="dailyInvestment">
+                    {frequency.substring(0, 1).toUpperCase() +
+                      frequency.substring(1)}{" "}
+                    Investment
+                  </Label>
+                  <Input
+                    id="dailyInvestment"
+                    type="number"
+                    value={amount}
+                    onChange={(e) => setAmount(parseInt(e.target.value))}
+                  />
                 </div>
 
                 <div className="flex flex-col space-y-1.5">
-                  <Label htmlFor="projectedInvestment">Projected Investment</Label>
-                  <Input id="projectedInvestment" readOnly  value={"100"} className="bg-secondary/100"/>
+                  <Label htmlFor="projectedInvestment">
+                    Projected Investment
+                  </Label>
+                  <Input
+                    readOnly
+                    value={projectedInvestment}
+                    className="bg-secondary/100"
+                  />
                 </div>
 
                 <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="startDate">Start Date</Label>
-                  <Input id="startDate" readOnly  value={"Today"} className="bg-secondary/100"/>
+                  <Input
+                    id="startDate"
+                    readOnly
+                    value={"Today"}
+                    className="bg-secondary/100"
+                  />
                 </div>
 
                 <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="endDate">End Date</Label>
-                  <Input id="endDate" readOnly  value={"9 Oct 2023"} className="bg-secondary/100"/>
+                  <Input
+                    id="endDate"
+                    readOnly
+                    value={"9 Oct 2023"}
+                    className="bg-secondary/100"
+                  />
                 </div>
-
               </div>
             </form>
           </CardContent>
           <CardFooter className="flex justify-end">
-
-            {(isClient && !isConnected) && (
-              <ConnectButton  />
-            )}
-            {(isClient && isConnected) && (
+            {isClient && !isConnected && <ConnectButton />}
+            {isClient && isConnected && (
               <>
-              <Button onClick={() => processInvest()}>Deploy</Button>
+                <Button onClick={() => processInvest()}>Deploy</Button>
 
-              <Dialog open={openDialog} onOpenChange={setOpenDialog}>
-                <DialogContent className="sm:max-w-[425px]">
-                  <DialogHeader>
-                    <DialogTitle>Transaction Submitted</DialogTitle>
-                    <DialogDescription>
-                      Make changes to your profile here. Click save when you're done.
-                    </DialogDescription>
-                  </DialogHeader>
-                  <div className="grid gap-4 py-4">
-                    <p>$150 USDC Deposited</p>
-                    <p>$10 USDC - 0.0004 ETH </p>
-                    <p> + Gitcoin Score</p>
-                    <p>You need to deposit again within 3 days</p>
-                  </div>
+                <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+                  <DialogContent className="sm:max-w-[425px]">
+                    <DialogHeader>
+                      <DialogTitle>Transaction Submitted</DialogTitle>
+                      <DialogDescription>
+                        Make changes to your profile here. Click save when
+                        you're done.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="grid gap-4 py-4">
+                      <p>$150 USDC Deposited</p>
+                      <p>$10 USDC - 0.0004 ETH </p>
+                      <p> + Gitcoin Score</p>
+                      <p>You need to deposit again within 3 days</p>
+                    </div>
 
-                  <DialogFooter>
-                    <Button variant={'outline'} onClick={() => setOpenDialog(false)}>Cancel</Button>
-                    <Button type="submit" onClick={() => setOpenDialog(false)}>Save changes</Button>
-                  </DialogFooter>
-                </DialogContent>
-              </Dialog>  
-
+                    <DialogFooter>
+                      <Button
+                        variant={"outline"}
+                        onClick={() => setOpenDialog(false)}
+                      >
+                        Cancel
+                      </Button>
+                      <Button
+                        type="submit"
+                        onClick={() => setOpenDialog(false)}
+                      >
+                        Save changes
+                      </Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
               </>
-
             )}
-
           </CardFooter>
         </Card>
-
       </main>
-
     </div>
   );
 };
