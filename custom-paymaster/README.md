@@ -28,6 +28,7 @@ Here's a lineup of commands to assist you:
 - `yarn install`: Installs the required dependencies.
 - `yarn compile`: Compiles the contracts.
 - `yarn hardhat deploy-zksync --script deploy-paymaster.ts`: Deploys your contracts smoothly.
+- After deploying, update env with deployed token, paymaster, and new wallet private key.
 - `yarn hardhat deploy-zksync --script use-paymaster.ts`: Executes the `use-paymaster.ts` script.
 - `yarn test`: Runs tests. **Make sure to check the test requirements below.**
 
@@ -39,6 +40,9 @@ To use it, rename `.env.example` to `.env` and input your private key.
 
 ```
 WALLET_PRIVATE_KEY=123cde574ccff....
+PAYMASTER_ADDRESS=0x....
+TOKEN_ADDRESS=0x....
+NEW_WALLET_PRIVATE_KEY=3333.....
 ```
 
 ### Local testing 🧪
