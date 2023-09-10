@@ -36,10 +36,6 @@ const Header = () => {
       href: "/portfolio",
       label: "Portfolio",
     },
-    {
-      href: "/leaderboard",
-      label: "Leader Board",
-    },
   ];
 
   return (
