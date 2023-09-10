@@ -22,12 +22,24 @@ import {
   TabsList,
   TabsTrigger,
 } from "../../components/ui/tabs"
+
+
 const portfolioItem = 
   {
     title: "ETH $10/Day",
     text1: "You need to deposit within 3 days.",
     text2: "",
     dateText: "9 Sep 2023",
+    detail: {
+      dailyInvestment: "$10",
+      periodsCompleted: "1 out of 30",
+      invested: "$10",
+      accruedEth: "0.006 (-$1620 avg price)",
+      awaitingDeposit: "$260",
+      available: "$30",
+      deposit: 100,
+      message: "You need to deposit within 3 days.",
+    }
   };
 
 const Portfolio: NextPage = () => {
@@ -52,32 +64,56 @@ const Portfolio: NextPage = () => {
           <TabsContent value="summ">
             <Card>
               <CardHeader>
-                <CardTitle>Account</CardTitle>
+                <CardTitle>ETH</CardTitle>
                 <CardDescription>
-                  Make changes to your account here. Click save when you're done.
+                  Manage your individual position.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-2">
                 <div className="space-y-1">
-                  <Label htmlFor="name">Name</Label>
-                  <Input id="name" defaultValue="Pedro Duarte" />
+                  <Label htmlFor="name">Daily Investment:</Label>
+                  <Input id="name" defaultValue={portfolioItem.detail.dailyInvestment} className="bg-secondary/100" readOnly />
                 </div>
                 <div className="space-y-1">
-                  <Label htmlFor="username">Username</Label>
-                  <Input id="username" defaultValue="@peduarte" />
+                  <Label htmlFor="name">Periods Completed:</Label>
+                  <Input id="name" defaultValue={portfolioItem.detail.periodsCompleted} className="bg-secondary/100" readOnly />
+                </div>
+                <div className="space-y-1">
+                  <Label htmlFor="name">Invested:</Label>
+                  <Input id="name" defaultValue={portfolioItem.detail.invested} className="bg-secondary/100" readOnly />
+                </div>
+                <div className="space-y-1">
+                  <Label htmlFor="name">Accrued ETH:</Label>
+                  <Input id="name" defaultValue={portfolioItem.detail.accruedEth} className="bg-secondary/100" readOnly />
+                </div>
+                <div className="space-y-1">
+                  <Label htmlFor="name">Awaiting Deposit:</Label>
+                  <Input id="name" defaultValue={portfolioItem.detail.awaitingDeposit} className="bg-secondary/100" readOnly />
+                </div>
+                <div className="space-y-1">
+                  <Label htmlFor="name">Available:</Label>
+                  <Input id="name" defaultValue={portfolioItem.detail.available} className="bg-secondary/100" readOnly />
+                </div>
+                <div className="space-y-1">
+                  <Label htmlFor="name">Deposit:</Label>
+                  <Input id="name" defaultValue={portfolioItem.detail.deposit} />
+                </div>
+                <div className="space-y-1">
+                  <p className="text-red-500">{portfolioItem.detail.message}</p>  
                 </div>
               </CardContent>
-              <CardFooter>
-                <Button>Save changes</Button>
+              <CardFooter className='justify-between'>
+                <Button variant={"outline"}>Cancel</Button>
+                <Button>Closed</Button>
               </CardFooter>
             </Card>
           </TabsContent>
           <TabsContent value="trans">
             <Card>
               <CardHeader>
-                <CardTitle>Password</CardTitle>
+                <CardTitle>ETH</CardTitle>
                 <CardDescription>
-                  Change your password here. After saving, you'll be logged out.
+                  Check your transaction history.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-2">

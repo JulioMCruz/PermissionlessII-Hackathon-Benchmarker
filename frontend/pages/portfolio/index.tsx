@@ -16,6 +16,7 @@ import {
   CardHeader,
   CardTitle,
 } from "../../components/ui/card"
+import Link from 'next/link';
 
 const portfolioList = [
   {
@@ -66,18 +67,20 @@ const Portfolio: NextPage = () => {
           <CardContent>
             <form>
               { portfolioList.map((portfolio, i) => (
-              <Card key={"portfolio-" + i} className='p-4 mb-6'>
-                <CardContent>
-                  <h1 className="mb-2"><b>{portfolio.title}</b></h1>
-                  <p className="mb-2">{portfolio.text1}</p>
-                  {portfolio.text2 && (
-                  <p className="mb-2">{portfolio.text2}</p>
-                  )}
-                  <span className='inline-flex'>
-                    <CalendarDays className="h-6 w-6" /> 
-                    <p className="ml-2">{portfolio.dateText}</p></span>
-                </CardContent>
-              </Card>
+                <Link href="/portfoliodetail">
+                  <Card key={"portfolio-" + i} className='p-4 mb-6'>
+                    <CardContent>
+                      <h1 className="mb-2"><b>{portfolio.title}</b></h1>
+                      <p className="mb-2">{portfolio.text1}</p>
+                      {portfolio.text2 && (
+                      <p className="mb-2">{portfolio.text2}</p>
+                      )}
+                      <span className='inline-flex'>
+                        <CalendarDays className="h-6 w-6" /> 
+                        <p className="ml-2">{portfolio.dateText}</p></span>
+                    </CardContent>
+                  </Card>
+                </Link>
               ))}
             </form>
           </CardContent>
