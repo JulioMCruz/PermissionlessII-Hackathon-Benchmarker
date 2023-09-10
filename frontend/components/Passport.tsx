@@ -102,7 +102,7 @@ const Passport = () => {
       });
     
   return (
-    <div className="min-h-screen flex items-center justify-center ml-2" style={{width: "200px"}}>
+    <div className="flex items-center justify-center ml-2" style={{width: "200px"}}>
       <div className="bg-green-800 py-0.5 px-2 rounded-sm">
         <div className="text-center text-white">
           <p>Gitcoin Passport Score:</p>
