@@ -68,9 +68,9 @@ const Invest: NextPage = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [projectedInvestment, setProjectedInvestment] = useState(0);
   const [selectedAsset, setSelectedAsset] = useState("eth");
-  const [duration, setDuration] = useState(0);
+  const [duration, setDuration] = useState(30);
   const [frequency, setFrequency] = useState("daily");
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(10);
 
   useEffect(() => {
     setIsClient(true);
@@ -107,7 +107,7 @@ const Invest: NextPage = () => {
               <div className="grid w-full items-center gap-4">
                 <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="frequency">Frequency</Label>
-                  <Select onValueChange={setFrequency}>
+                  <Select onValueChange={setFrequency} defaultValue="daily">
                     <SelectTrigger id="frequency">
                       <SelectValue placeholder="Select" />
                     </SelectTrigger>
@@ -137,7 +137,10 @@ const Invest: NextPage = () => {
 
                 <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="buying">Buying</Label>
-                  <Select onValueChange={setSelectedAsset}>
+                  <Select
+                    onValueChange={setSelectedAsset}
+                    defaultValue={selectedAsset}
+                  >
                     <SelectTrigger id="buying">
                       <SelectValue placeholder="Select" />
                     </SelectTrigger>
