@@ -1,9 +1,10 @@
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useAccount } from "wagmi";
-import type { NextPage } from "next";
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import CreateAAWallet from "../components/createAAWallet";
+
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import styles from '../styles/Home.module.css';
+import Passport from '../components/Passport';
+import Container from "../components/Container";
 
 const Home: NextPage = () => {
   const { address, isConnected } = useAccount();
@@ -20,8 +21,23 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <ConnectButton />
-        {isConnected && <CreateAAWallet />}
+        <Container>
+          <div className="space-y-10 pb-10">
+            <div className="p-4 sm:p-6 lg:p-8 rounded-lg overflow-hidden">
+              <div
+                style={{ backgroundImage: `url(/img/benchmarker.jpeg)` }}
+                className="rounded-lg relative aspect-square md:aspect-[2.4/1] overflow-hidden bg-cover"
+              >
+                <div className="h-full w-full flex flex-col justify-center items-center text-center gap-y-8">
+                  <div className="font-bold text-3xl sm:text-5xl lg:text-6xl sm:max-w-xl max-w-xs text-black dark:text-white bg-secondary/100 p-4 rounded-lg">
+                    <h1>Benchmarker</h1>
+                    <p className="text-lg">Use USDC to effortlessly DCA into any cryptocurrency with zero gas fees & instant withdrawals.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
       </main>
     </div>
   );
