@@ -25,6 +25,12 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
   [publicProvider()]
 );
 
+import { ThemeProvider } from "next-themes";
+import Header from "../components/Header";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+
+
 const { connectors } = getDefaultWallets({
   appName: 'RainbowKit App',
   projectId: 'YOUR_PROJECT_ID',
@@ -42,7 +48,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider chains={chains}>
-        <Component {...pageProps} />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Header />
+          <Component {...pageProps} />
+        </ThemeProvider>
       </RainbowKitProvider>
     </WagmiConfig>
   );
