@@ -12,6 +12,8 @@ import Passport from '../components/Passport';
 import { useAccount } from "wagmi";
 import { useState, useEffect } from 'react'
 
+import Image from 'next/image'
+
 
 const Header = () => {
   const { theme, setTheme } = useTheme();
@@ -65,7 +67,15 @@ const Header = () => {
               </SheetContent>
             </Sheet>
             <Link href="/" className="ml-4 lg:ml-0">
-              <h1 className="text-xl font-bold">Benchmarker</h1>
+              {/* <h1 className="text-xl font-bold">Benchmarker</h1> */}
+              {(isClient && (theme === "light")) && (
+              <Image
+                src="/img/logo.png"
+                width={50}
+                height={50}
+                alt="Picture of the author"
+              />              
+              )}
             </Link>
           </div>
           <nav className="mx-6 flex items-center space-x-4 lg:space-x-6 hidden md:block">
@@ -96,10 +106,9 @@ const Header = () => {
             <ConnectButton />
 
             {/* <Passport /> */}
-            {(isClient && isConnected) && (
+            {/* {(isClient && isConnected) && (
               <Passport />
-            )}
-
+            )} */}
 
           </div>
         </div>
