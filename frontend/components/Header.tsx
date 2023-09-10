@@ -113,9 +113,9 @@ const Header = () => {
             <ConnectButton />
 
             {/* <Passport /> */}
-            {/* {(isClient && isConnected) && (
+            {(isClient && isConnected) && (
               <Passport />
-            )} */}
+            )}
           </div>
         </div>
       </Container>
