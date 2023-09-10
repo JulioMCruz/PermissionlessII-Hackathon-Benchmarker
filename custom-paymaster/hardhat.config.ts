@@ -3,6 +3,8 @@ import { HardhatUserConfig } from "hardhat/config";
 import "@matterlabs/hardhat-zksync-deploy";
 import "@matterlabs/hardhat-zksync-solc";
 
+require("dotenv").config();
+
 // dynamically changes endpoints for local tests
 const zkSyncLocalTestnet =
   process.env.NODE_ENV == "test"
@@ -31,6 +33,18 @@ const config: HardhatUserConfig = {
       zksync: false,
     },
     zkSyncLocalTestnet,
+    // for mainnet
+    "base-mainnet": {
+      url: "https://mainnet.base.org",
+      accounts: [process.env.WALLET_PRIVATE_KEY as string],
+      gasPrice: 1000000000,
+    },
+    // for testnet
+    "base-goerli": {
+      url: "https://goerli.base.org",
+      accounts: [process.env.WALLET_PRIVATE_KEY as string],
+      gasPrice: 1000000000,
+    },
   },
   solidity: {
     version: "0.8.17",
