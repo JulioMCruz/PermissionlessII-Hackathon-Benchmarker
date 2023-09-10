@@ -9,7 +9,6 @@ import { verifyMessage } from "ethers";
 const Passport = () => {
 
     const [nonce, setNonce] = useState("");
-
     const [passportScore, setPassportScore] = useState(0);
 
     const { address } = useAccount({
@@ -96,24 +95,22 @@ const Passport = () => {
             return;
           }
     
-          console.log("scoreResponse", scoreResponse.data);
-    
+          console.log("scoreResponse", scoreResponse.data);    
           setPassportScore(scoreResponse.data.score);
 
-        //   if (scoreResponse.data.score >= 1) {
-        //     await Router.push("/dashboard");
-        //   } else {
-        //     await Router.push("/denied");
-        //   }
         },
       });
     
-
-    return (
-        <div className='mt-8'>
-            Passport Score: {passportScore}
+  return (
+    <div className="min-h-screen flex items-center justify-center ml-2" style={{width: "200px"}}>
+      <div className="bg-green-800 p-2 rounded-xl">
+        <div className="text-center">
+          <p>Passport Score:</p>
+          <p>{passportScore | 0 }</p>
         </div>
-    );
+      </div>
+    </div>
+  );
 
 }
 
