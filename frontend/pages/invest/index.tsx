@@ -26,16 +26,31 @@ import {
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useAccount } from "wagmi";
 import { useState, useEffect } from 'react'
-
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../../components/ui/dialog"
 
 const Invest: NextPage = () => {
 
   const { isConnected } = useAccount();
   const [isClient, setIsClient] = useState(false)
+  const [openDialog, setOpenDialog] = useState(false);
  
   useEffect(() => {
     setIsClient(true)
   }, [])
+
+
+  const processInvest = () => {
+    console.log("Investing...")
+    setOpenDialog(true);
+  }
 
   return (
     <div className={styles.container}>
@@ -120,7 +135,33 @@ const Invest: NextPage = () => {
               <ConnectButton  />
             )}
             {(isClient && isConnected) && (
-              <Button>Deploy</Button>
+              <>
+              <Button onClick={() => processInvest()}>Deploy</Button>
+
+              <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+                <DialogContent className="sm:max-w-[425px]">
+                  <DialogHeader>
+                    <DialogTitle>Transaction Submitted</DialogTitle>
+                    <DialogDescription>
+                      Make changes to your profile here. Click save when you're done.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="grid gap-4 py-4">
+                    <p>$150 USDC Deposited</p>
+                    <p>$10 USDC - 0.0004 ETH </p>
+                    <p> + Gitcoin Score</p>
+                    <p>You need to deposit again within 3 days</p>
+                  </div>
+
+                  <DialogFooter>
+                    <Button variant={'outline'} onClick={() => setOpenDialog(false)}>Cancel</Button>
+                    <Button type="submit" onClick={() => setOpenDialog(false)}>Save changes</Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>  
+
+              </>
+
             )}
 
           </CardFooter>
