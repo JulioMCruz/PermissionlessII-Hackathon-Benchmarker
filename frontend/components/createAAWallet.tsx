@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useAccount, useBlockNumber } from "wagmi";
+import { useAccount, useBlockNumber, Address } from "wagmi";
 import type { NextComponentType } from "next";
 import styles from "../styles/Home.module.css";
 import {
@@ -9,8 +9,14 @@ import {
 } from "wagmi";
 
 import factoryAbi from "../abi/AAFactory.json";
-const factoryAddress = process.env.NEXT_PUBLIC_AA_FACTORY;
-const serverWalletAddress = process.env.NEXT_PUBLIC_SERVER_WALLET;
+let factoryAddress: Address = "0xa";
+if (process.env.NEXT_PUBLIC_AA_FACTORY) {
+  factoryAddress = process.env.NEXT_PUBLIC_AA_FACTORY as Address;
+}
+let serverWalletAddress: Address = "0xa";
+if (process.env.NEXT_PUBLIC_SERVER_WALLET) {
+  serverWalletAddress = process.env.NEXT_PUBLIC_SERVER_WALLET as Address;
+}
 const testSalt =
   "0x00000000000000000000000000000000000000000000000000000000testSalt";
 
