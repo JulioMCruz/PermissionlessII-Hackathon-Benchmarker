@@ -33,8 +33,8 @@ const Header = () => {
       label: "Invest",
     },
     {
-      href: "/positions",
-      label: "Positions",
+      href: "/portfolio",
+      label: "Portfolio",
     },
     {
       href: "/leaderboard",
