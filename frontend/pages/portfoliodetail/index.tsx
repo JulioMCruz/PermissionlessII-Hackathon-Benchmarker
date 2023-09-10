@@ -39,7 +39,25 @@ const portfolioItem =
       available: "$30",
       deposit: 100,
       message: "You need to deposit within 3 days.",
-    }
+    },
+    transactions:[
+      {
+        title: "$10 USDC -> 0.03 ETH",
+        dateText: "9 Sep 2023 1:00 pm",
+      },
+      {
+        title: "Inssuficient funds",
+        dateText: "8 Sep 2023 1:00 pm",
+      },
+      {
+        title: "Transaction Failed",
+        dateText: "& Sep 2023 1:00 pm",
+      },
+      {
+        title: "$10 USDC -> 0.03 ETH",
+        dateText: "10 Sep 2023 1:00 pm",
+      },
+    ]
   };
 
 const Portfolio: NextPage = () => {
@@ -117,14 +135,16 @@ const Portfolio: NextPage = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-2">
-                <div className="space-y-1">
-                  <Label htmlFor="current">Current password</Label>
-                  <Input id="current" type="password" />
-                </div>
-                <div className="space-y-1">
-                  <Label htmlFor="new">New password</Label>
-                  <Input id="new" type="password" />
-                </div>
+              { portfolioItem.transactions.map((portfolioTransaction, i) => (
+                <Card key={"portfolio-" + i} className='p-4 mb-6'>
+                  <CardContent>
+                    <h1 className="mb-2"><b>{portfolioTransaction.title}</b></h1>
+                    <span className='inline-flex'>
+                      <CalendarDays className="h-6 w-6" /> 
+                      <p className="ml-2">{portfolioTransaction.dateText}</p></span>
+                  </CardContent>
+                </Card>
+              ))}
               </CardContent>
               <CardFooter>
                 <Button>Save password</Button>
