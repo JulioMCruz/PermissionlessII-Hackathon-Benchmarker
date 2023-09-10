@@ -4,6 +4,8 @@ import "@matterlabs/hardhat-zksync-deploy";
 import "@matterlabs/hardhat-zksync-solc";
 import "@matterlabs/hardhat-zksync-verify";
 
+require("dotenv").config();
+
 const config: HardhatUserConfig = {
   zksolc: {
     version: "1.3.13",
@@ -23,6 +25,18 @@ const config: HardhatUserConfig = {
       zksync: true,
       verifyURL:
         "https://zksync2-testnet-explorer.zksync.dev/contract_verification",
+    },
+    // for mainnet
+    "base-mainnet": {
+      url: "https://mainnet.base.org",
+      accounts: [process.env.WALLET_PRIVATE_KEY as string],
+      gasPrice: 1000000000,
+    },
+    // for testnet
+    "base-goerli": {
+      url: "https://goerli.base.org",
+      accounts: [process.env.WALLET_PRIVATE_KEY as string],
+      gasPrice: 1000000000,
     },
   },
   solidity: {

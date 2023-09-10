@@ -29,5 +29,8 @@
     "compile": "hardhat compile",
     "fix:fmt": "prettier --write \"{deploy,test}/**/*.{ts,js,jsx,tsx}\"",
     "lint:fmt": "prettier --check \"{deploy,test}/**/*.{ts,js,jsx,tsx}\""
+  },
+  "dependencies": {
+    "@api3/contracts": "^0.11.0"
   }
 }

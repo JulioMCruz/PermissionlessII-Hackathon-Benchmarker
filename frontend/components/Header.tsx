@@ -7,22 +7,21 @@ import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "../components/ui/sheet";
 import { Menu, Moon, ShoppingCart, Sun } from "lucide-react";
 //import ProfileButton from "./ui/ProfileButton";
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-import Passport from '../components/Passport';
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import Passport from "../components/Passport";
 import { useAccount } from "wagmi";
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
 
-import Image from 'next/image'
-
+import Image from "next/image";
 
 const Header = () => {
   const { theme, setTheme } = useTheme();
   const { isConnected } = useAccount();
-  const [isClient, setIsClient] = useState(false)
- 
+  const [isClient, setIsClient] = useState(false);
+
   useEffect(() => {
-    setIsClient(true)
-  }, [])
+    setIsClient(true);
+  }, []);
 
   const routes = [
     {
@@ -56,7 +55,7 @@ const Header = () => {
                 <nav className="flex flex-col gap-4">
                   {routes.map((route, i) => (
                     <Link
-                      key={i}
+                      key={"route-" + i}
                       href={route.href}
                       className="block px-2 py-1 text-lg"
                     >
@@ -68,21 +67,21 @@ const Header = () => {
             </Sheet>
             <Link href="/" className="ml-4 lg:ml-0">
               {/* <h1 className="text-xl font-bold">Benchmarker</h1> */}
-              {(isClient && (theme === "light")) && (
-              <Image
-                src="/img/logo.png"
-                width={50}
-                height={50}
-                alt="Picture of the author"
-              />              
+              {isClient && theme === "light" && (
+                <Image
+                  src="/img/logo.png"
+                  width={50}
+                  height={50}
+                  alt="Picture of the author"
+                />
               )}
-              {(isClient && (theme === "dark")) && (
-              <Image
-                src="/img/logo-reverse.png"
-                width={50}
-                height={50}
-                alt="Picture of the author"
-              />              
+              {isClient && theme === "dark" && (
+                <Image
+                  src="/img/logo-reverse.png"
+                  width={50}
+                  height={50}
+                  alt="Picture of the author"
+                />
               )}
             </Link>
           </div>
@@ -90,7 +89,7 @@ const Header = () => {
             {routes.map((route, i) => (
               <Button asChild variant="ghost">
                 <Link
-                  key={i}
+                  key={"link-" + i}
                   href={route.href}
                   className="text-sm font-medium transition-colors"
                 >
@@ -117,7 +116,6 @@ const Header = () => {
             {/* {(isClient && isConnected) && (
               <Passport />
             )} */}
-
           </div>
         </div>
       </Container>
