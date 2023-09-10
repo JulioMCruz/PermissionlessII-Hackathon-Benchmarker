@@ -76,6 +76,14 @@ const Header = () => {
                 alt="Picture of the author"
               />              
               )}
+              {(isClient && (theme === "dark")) && (
+              <Image
+                src="/img/logo-reverse.png"
+                width={50}
+                height={50}
+                alt="Picture of the author"
+              />              
+              )}
             </Link>
           </div>
           <nav className="mx-6 flex items-center space-x-4 lg:space-x-6 hidden md:block">
