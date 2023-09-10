@@ -217,8 +217,8 @@ const Invest: NextPage = () => {
                       </DialogDescription>
                     </DialogHeader>
                     <div className="grid gap-4 py-4">
-                      <p>$150 USDC Deposited</p>
-                      <p>$10 USDC - 0.0004 ETH </p>
+                      <p>${projectedInvestment} USDC Deposited</p>
+                      <p>${amount} USDC - 0.0062 ETH </p>
                       <p> + Gitcoin Score</p>
                       <p>You need to deposit again within 3 days</p>
                     </div>
