@@ -3,6 +3,8 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import styles from '../../styles/Home.module.css';
 
+import { CalendarDays } from "lucide-react"
+
 import { Button } from "../../components/ui/button"
 import { Input } from "../../components/ui/input"
 import { Label } from "../../components/ui/label"
@@ -15,6 +17,32 @@ import {
   CardTitle,
 } from "../../components/ui/card"
 
+const portfolioList = [
+  {
+    title: "ETH $10/Day",
+    text1: "You need to deposit within 3 days.",
+    text2: "",
+    dateText: "9 Sep 2023",
+  },
+  {
+    title: "ETH $120/Monthly",
+    text1: "You need to deposit within 1 month.",
+    text2: "",
+    dateText: "8 Sep 2023",
+  },
+  {
+    title: "WBTC $40/Weekly",
+    text1: "You're fully deposited.",
+    text2: "Text 2",
+    dateText: "5 Sep 2023",
+  },
+  {
+    title: "ETH (Closed)",
+    text1: "USDC spend: $1237.34 ",
+    text2: "ETH Collected: 0.89 ($1582.34) ",
+    dateText: "1 Jan 2023",
+  },
+];
 
 const Portfolio: NextPage = () => {
   return (
@@ -37,16 +65,20 @@ const Portfolio: NextPage = () => {
           </CardHeader>
           <CardContent>
             <form>
-              <Card className='p-4 mb-6'>
+              { portfolioList.map((portfolio, i) => (
+              <Card key={"portfolio-" + i} className='p-4 mb-6'>
                 <CardContent>
-                  One
+                  <h1 className="mb-2"><b>{portfolio.title}</b></h1>
+                  <p className="mb-2">{portfolio.text1}</p>
+                  {portfolio.text2 && (
+                  <p className="mb-2">{portfolio.text2}</p>
+                  )}
+                  <span className='inline-flex'>
+                    <CalendarDays className="h-6 w-6" /> 
+                    <p className="ml-2">{portfolio.dateText}</p></span>
                 </CardContent>
               </Card>
-              <Card className='p-4 mb-6'>
-                <CardContent>
-                  Two
-                </CardContent>
-              </Card>
+              ))}
             </form>
           </CardContent>
         </Card>
