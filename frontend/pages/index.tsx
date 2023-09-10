@@ -19,9 +19,8 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <ConnectButton />
-
-        <Passport />
+        {/* <ConnectButton />
+        <Passport /> */}
 
         <div className="mt-8">
           <Button>Click me</Button>
