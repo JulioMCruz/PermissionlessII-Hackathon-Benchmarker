@@ -18,6 +18,10 @@ To run the scripts to deploy and execute the contracts, use the `zksync-deploy` 
 
 - `yarn hardhat deploy-zksync --script deploy-factory.ts`: deploys the factory contract
 
+After deployment, verify the contract with
+
+- `yarn hardhat verify {contractAddress} {constructor hash}`
+
 Optionally deploy an example multisig to verify working. Otherwise this will be completed via ui per user
 
 - `yarn hardhat deploy-zksync --script deploy-multisig.ts`: deploys a multisig wallet and executes a transaction.
